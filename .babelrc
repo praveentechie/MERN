@@ -1,0 +1,18 @@
+{
+  "presets": [
+    "react",
+    "es2015",
+    "react-hmre",
+    "stage-2",
+    "stage-0"
+  ],
+  "plugins": [
+    "add-module-exports",
+    "react-hot-loader/babel"
+  ],
+  "env": {
+    "development": {
+      "plugins": ["react-hot-loader/babel"]
+    }
+  }
+}
