@@ -1,4 +1,5 @@
 // import 'babel-polyfill';
+console.log('process', process);
 import React                    from 'react';
 window.React = React;
 import ReactDOM                 from 'react-dom';

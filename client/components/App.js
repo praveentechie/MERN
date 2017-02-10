@@ -6,11 +6,11 @@ export default class App extends Component {
   }
   render() {
     console.log('child', this.props.children);
-    console.log(this.props);
+    console.log(process.env);
     return (
       <div className='app-container'>
         {this.props.children}
-        <div><h1>Hello App</h1></div>
+        <div><h1>Hello App test</h1></div>
       </div>
     );
   }

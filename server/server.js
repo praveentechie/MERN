@@ -14,8 +14,8 @@ let serverPort = 3008;
 app.use(cors());
 app.options('*', cors());
 app.set('views', path.join(__dirname, 'views'));
-app.set('/build', path.join(__dirname, '../', 'build'));
-// app.use('/build', express.static(path.join(__dirname, '../', 'build')));
+// app.set('/build', path.join(__dirname, '../', 'build'));
+app.use('/build', express.static(path.join(__dirname, '../', 'build')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
