@@ -31,7 +31,7 @@ app.use(clientSessions({
   // }
 }));
 
-app.use('/', viewRoute);
+app.use('*', viewRoute);
 app.use('/authenticate', loginRoute);
 
 app.listen(serverPort, function(err) {

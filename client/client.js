@@ -1,4 +1,4 @@
-// import 'babel-polyfill';
+import 'babel-polyfill';
 console.log('process', process);
 import React                    from 'react';
 window.React = React;
@@ -8,12 +8,13 @@ import {Provider}               from 'react-redux';
 import {
   Router,
   Route,
-  Redirect,
+  IndexRedirect,
   browserHistory
 }                               from 'react-router';
-import createHistory            from 'history/lib/createHashHistory';
-import {syncReduxAndRouter,
-        routeReducer}           from 'redux-simple-router';
+import {
+  syncHistoryWithStore,
+  routerReducer
+}                               from 'react-router-redux';
 import ReducerRegistry          from './utils/ReducerRegistry';
 import storeFactory             from './utils/StoreFactory';
 import App                      from './components/App';
@@ -21,13 +22,9 @@ import App                      from './components/App';
 // import 'jquery.growl/stylesheets/jquery.growl.css';
 // import './css/Utils.css';
 // import './sass/Utils.scss';
-
+let history = null;
 const reducerRegistry = new ReducerRegistry({
-  routing: routeReducer
-});
-
-const history = createHistory({
-  queryKey: false
+  routing: routerReducer
 });
 
 const getDebugPanel = ()=>{
@@ -48,11 +45,7 @@ Promise.all([storeFactory(combineReducers(reducerRegistry.getReducers()))]).then
   reducerRegistry.setChangeListener((reducers) => {
     store.replaceReducer(combineReducers(reducerRegistry.getReducers()));
   });
-
-  // reducerRegistry.register({
-  //   userInfo: require('./reducers/userInfoReducer')
-  // });
-  syncReduxAndRouter(history, store);
+  history = syncHistoryWithStore(browserHistory, store);
   render(store,DebuggingPanel);
 }).catch(error=>{
   throw error;
@@ -60,14 +53,13 @@ Promise.all([storeFactory(combineReducers(reducerRegistry.getReducers()))]).then
 
 
 const render = (store,DebuggingPanel)=>{
-  console.log('render');
   ReactDOM.render(
     <div>
       <Provider store={store}>
         <div>
-          <Router history={browserHistory}>
+          <Router history={history}>
             <Route path='/' component={App}>
-              <div><h1>Hello App</h1></div>
+              {require('./routes/HomeRoute')(reducerRegistry)}
             </Route>
           </Router>
         </div>

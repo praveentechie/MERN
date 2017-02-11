@@ -3,7 +3,6 @@
     "react",
     "es2015",
     "react-hmre",
-    "stage-2",
     "stage-0"
   ],
   "plugins": [
