@@ -1,5 +1,4 @@
 import 'babel-polyfill';
-console.log('process', process);
 import React                    from 'react';
 window.React = React;
 import ReactDOM                 from 'react-dom';
@@ -27,32 +26,19 @@ const reducerRegistry = new ReducerRegistry({
   routing: routerReducer
 });
 
-const getDebugPanel = ()=>{
-  return new Promise((resolve,reject)=>{
-    if(process.env.NODE_ENV === 'development'){
-      require.ensure([], (require) => {
-        // resolve(require('../components/DevTools'));
-      });
-    }else{
-      resolve(null);
-    }
-  });
-};
-
 Promise.all([storeFactory(combineReducers(reducerRegistry.getReducers()))]).then(resolves=>{
   let store = resolves[0];
-  let DebuggingPanel = resolves[1];
   reducerRegistry.setChangeListener((reducers) => {
     store.replaceReducer(combineReducers(reducerRegistry.getReducers()));
   });
   history = syncHistoryWithStore(browserHistory, store);
-  render(store,DebuggingPanel);
+  render(store);
 }).catch(error=>{
+  console.log('init error', error);
   throw error;
 });
 
-
-const render = (store,DebuggingPanel)=>{
+const render = (store)=>{
   ReactDOM.render(
     <div>
       <Provider store={store}>

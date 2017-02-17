@@ -4,17 +4,24 @@ import cookieParser   from 'cookie-parser';
 import cors           from 'cors';
 import express        from 'express';
 import path           from 'path';
+import mongoose       from 'mongoose';
 
-import loginRoute     from './routes/loginRoute';
+import config         from '../appConfig';
+// Import all routes
+import userRoute      from './routes/userRoute';
 import viewRoute      from './routes/viewRoute';
 
-let app = express();
-let serverPort = 3008;
+let app = express(),
+  {
+    serverInstance,
+    serverPort,
+    dbInstance,
+    dbPort
+  } = config;
 
 app.use(cors());
 app.options('*', cors());
-app.set('views', path.join(__dirname, 'views'));
-// app.set('/build', path.join(__dirname, '../', 'build'));
+app.use(express.static(path.join(__dirname, '/views')));
 app.use('/build', express.static(path.join(__dirname, '../', 'build')));
 
 app.use(bodyParser.json());
@@ -31,13 +38,22 @@ app.use(clientSessions({
   // }
 }));
 
-app.use('*', viewRoute);
-app.use('/authenticate', loginRoute);
+app.use('/user', userRoute);
+app.use('/', viewRoute);
 
-app.listen(serverPort, function(err) {
+/* Replace depricated mongo promise and use from Node */
+mongoose.Promise = global.Promise;
+mongoose.connect(`mongodb://${dbInstance}:${dbPort}/mern`).then((db)=> {
+  console.log('Connected to db');
+}).catch(err => {
+  console.log('Failed to connect to db', err);
+});
+
+/* Start server */
+app.listen(serverPort, serverInstance, function(err) {
   if (err) {
     console.error('Failed with ', err);
     return;
   }
-  console.log('Open url ', serverPort);
+  console.log('Server running in', serverPort);
 });

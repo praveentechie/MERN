@@ -6,13 +6,13 @@ export default class App extends Component {
     super(props);
   }
   render() {
-    console.log('child', this.props.children);
-    console.log(process.env);
     return (
       <div className='app-container'>
-        {this.props.children}
-        <div><h1>Hello App test</h1></div>
+        <h1>MERN App test</h1>
         <Link to='/home'>Home</Link>
+        &nbsp;&nbsp;
+        <Link to='/user-list'>Users</Link>
+        {this.props.children}
       </div>
     );
   }

@@ -51,6 +51,7 @@ var webpackOptions = {
     tls: 'empty'
   },
   plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
