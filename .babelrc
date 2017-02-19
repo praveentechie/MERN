@@ -10,8 +10,7 @@
   ],
   "env": {
     "development": {
-      "presets": ["react-hmre"],
-      "plugins": ["react-hot-loader/babel"]
+      "presets": ["react-hmre"]
     }
   }
 }

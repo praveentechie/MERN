@@ -11,18 +11,45 @@ import config         from '../appConfig';
 import userRoute      from './routes/userRoute';
 import viewRoute      from './routes/viewRoute';
 
-let app = express(),
-  {
-    serverInstance,
-    serverPort,
-    dbInstance,
-    dbPort
-  } = config;
+let app = express();
+let {
+  serverInstance,
+  serverPort,
+  dbInstance,
+  dbPort,
+  env
+} = config;
 
 app.use(cors());
 app.options('*', cors());
 app.use(express.static(path.join(__dirname, '/views')));
-app.use('/build', express.static(path.join(__dirname, '../', 'build')));
+app.use('/build', express.static(__dirname + '../build/'));
+
+/* Enable hot reload for dev mode */
+if (env === 'development') {
+  let webpackDevMiddleware = require("webpack-dev-middleware");
+  let webpackHotMiddleware = require("webpack-hot-middleware");
+  let webpack = require('webpack');
+  let webpackConfig = require('../webpack/dev.hot.js');
+  let compiler = webpack(webpackConfig);
+
+  app.use(webpackDevMiddleware(compiler, {
+    hot: true,
+    filename: 'client.js',
+    publicPath: '/',
+    stats: {
+      colors: true,
+    },
+    historyApiFallback: true,
+  }));
+
+  app.use(webpackHotMiddleware(compiler, {
+    log: console.log,
+    path: '/__webpack_hmr',
+    heartbeat: 10 * 1000,
+  }));
+
+}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

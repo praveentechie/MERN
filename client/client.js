@@ -54,3 +54,6 @@ const render = (store)=>{
     document.getElementById('mount')
   );
 };
+if (module.hot) {
+  module.hot.accept();
+}

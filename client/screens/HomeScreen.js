@@ -16,7 +16,6 @@ class HomeScreen extends Component {
     this.actions.editUserName(e.target.value);
   }
   render() {
-    console.log('test');
     let { user } = this.props.homeReducer;
     return(
       <div className='page-container'>

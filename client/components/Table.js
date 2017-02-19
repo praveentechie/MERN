@@ -3,8 +3,7 @@ import {
   BootstrapTable,
   TableHeaderColumn
 }                             from 'react-bootstrap-table';
-// import '../css/react-bootstrap-table.min.css';
-// import '../css/table.css';
+import '../css/react-bootstrap-table.min.css';
 import '../css/table.scss';
 
 export default class Table extends Component {
@@ -12,10 +11,9 @@ export default class Table extends Component {
     super(props);
   }
   priceFormatter(cell, row){
-    return '<i class="fa fa-plug"></i> ' + cell;
+    return <span><i className="fa fa-plug"></i> {cell}</span>;
   }
   render() {
-    console.log('log updated');
     var products = [{
       id: 1,
       name: "Item name 1",
