@@ -4,7 +4,7 @@ export default {
   getAllUsers() {
     return restClient({
       method: 'GET',
-      path: '/user/all'
+      path: '/v1/users'
     });
   }
 };

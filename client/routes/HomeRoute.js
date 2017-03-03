@@ -10,22 +10,11 @@ export default (reducerRegistry) => {
         });
         cb(null, component);
       });
-    },
-    renderUsers: (location, cb) => {
-      require(['../screens/UserScreen', '../reducers/UserReducer'], (component, reducer)=> {
-        reducerRegistry.register({
-          userReducer: reducer
-        });
-        cb(null, component);
-      });
     }
   };
 
   return(
-    <Route>
-      <Route path='/home' getComponent={appRoute.renderHome} />
-      <Route path='/user-list' getComponent={appRoute.renderUsers} />
-    </Route>
+    <Route path='/home' getComponent={appRoute.renderHome} />
   );
 
 };

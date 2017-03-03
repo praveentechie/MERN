@@ -8,7 +8,7 @@ import {
   Router,
   Route,
   IndexRedirect,
-  browserHistory
+  hashHistory
 }                               from 'react-router';
 import {
   syncHistoryWithStore,
@@ -17,6 +17,7 @@ import {
 import ReducerRegistry          from './utils/ReducerRegistry';
 import storeFactory             from './utils/StoreFactory';
 import App                      from './components/App';
+import RouteNotFound            from './components/RouteNotFound';
 
 // import 'jquery.growl/stylesheets/jquery.growl.css';
 // import './css/Utils.css';
@@ -31,10 +32,9 @@ Promise.all([storeFactory(combineReducers(reducerRegistry.getReducers()))]).then
   reducerRegistry.setChangeListener((reducers) => {
     store.replaceReducer(combineReducers(reducerRegistry.getReducers()));
   });
-  history = syncHistoryWithStore(browserHistory, store);
+  history = syncHistoryWithStore(hashHistory, store);
   render(store);
 }).catch(error=>{
-  console.log('init error', error);
   throw error;
 });
 
@@ -46,7 +46,9 @@ const render = (store)=>{
           <Router history={history}>
             <Route path='/' component={App}>
               {require('./routes/HomeRoute')(reducerRegistry)}
+              {require('./routes/ComponentsRoute')(reducerRegistry)}
             </Route>
+            <Route path='*' component={RouteNotFound}/>
           </Router>
         </div>
       </Provider>

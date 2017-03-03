@@ -3,9 +3,9 @@ import clientSessions from 'client-sessions';
 import cookieParser   from 'cookie-parser';
 import cors           from 'cors';
 import express        from 'express';
+import helmet         from 'helmet';
 import path           from 'path';
 import mongoose       from 'mongoose';
-
 import config         from '../appConfig';
 // Import all routes
 import userRoute      from './routes/userRoute';
@@ -20,10 +20,12 @@ let {
   env
 } = config;
 
+app.use(helmet());
 app.use(cors());
 app.options('*', cors());
-app.use(express.static(path.join(__dirname, '/views')));
-app.use('/build', express.static(__dirname + '../build/'));
+app.use(express.static(path.join(__dirname, './home.html')));
+app.use('/build', express.static(path.join(__dirname, '../build')));
+app.use('/public', express.static(path.join(__dirname, '../public')));
 
 /* Enable hot reload for dev mode */
 if (env === 'development') {
@@ -65,8 +67,8 @@ app.use(clientSessions({
   // }
 }));
 
-app.use('/user', userRoute);
 app.use('/', viewRoute);
+app.use('/v*/users', userRoute);
 
 /* Replace depricated mongo promise and use from Node */
 mongoose.Promise = global.Promise;

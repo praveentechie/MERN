@@ -1,5 +1,6 @@
-import React, {Component}      from 'react';
-import { Link }                from 'react-router';
+import React, {Component}   from 'react';
+import AppNavigator         from './AppNavigator';
+import '../scss/mern.scss';
 
 export default class App extends Component {
   constructor(props) {
@@ -8,10 +9,10 @@ export default class App extends Component {
   render() {
     return (
       <div className='app-container'>
-        <h1>MERN App test</h1>
-        <Link to='/home'>Home</Link>
-        &nbsp;&nbsp;
-        <Link to='/user-list'>Users</Link>
+        <h1 className='page-title'>
+          <i className='fa fa-angellist'/> MERN Stack
+        </h1>
+        <AppNavigator />
         {this.props.children}
       </div>
     );

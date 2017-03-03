@@ -19,13 +19,7 @@ class HomeScreen extends Component {
     let { user } = this.props.homeReducer;
     return(
       <div className='page-container'>
-        Hey, {user}
-        <div style={{marginTop: '10px'}}>
-          <input type='text'
-            onChange={this.editUserName}
-            value={user}
-          />
-        </div>
+        List of components and Arch is available.
       </div>
     );
   }
