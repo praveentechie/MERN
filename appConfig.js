@@ -1,8 +1,8 @@
 let config = require('dotenv').config({path: './.env'});
 
-let parsedOption = config.parsed;
-console.log('config', parsedOption);
-parsedOption = configOptions ? {
+let configOptions = config.parsed;
+console.log('config', configOptions);
+configOptions = configOptions ? {
   serverPort: parseInt(configOptions.SERVER_PORT),
   dbInstance: configOptions.DB_INSTANCE,
   dbPort: parseInt(configOptions.DB_PORT),
