@@ -13,7 +13,6 @@ import viewRoute      from './routes/viewRoute';
 
 let app = express();
 let {
-  serverInstance,
   serverPort,
   dbInstance,
   dbPort,
@@ -79,7 +78,7 @@ mongoose.connect(`mongodb://${dbInstance}:${dbPort}/mern`).then((db)=> {
 });
 
 /* Start server */
-app.listen(serverPort, serverInstance, function(err) {
+app.listen(serverPort, function(err) {
   if (err) {
     console.error('Failed with ', err);
     return;
