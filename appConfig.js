@@ -1,8 +1,8 @@
 let config = require('dotenv').config({path: './.env'});
 
 let configOptions = config.parsed;
-
-export default {
+console.log('config', configOptions);
+module.exports = {
   serverInstance: configOptions.SERVER_INSTANCE,
   serverPort: parseInt(configOptions.SERVER_PORT),
   dbInstance: configOptions.DB_INSTANCE,

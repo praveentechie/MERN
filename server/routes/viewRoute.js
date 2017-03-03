@@ -4,7 +4,7 @@ import path    from 'path';
 let router = express.Router();
 
 router.get('/', function (req, res) {
-  res.sendFile('home.html', { root: path.join(__dirname, '../') });
+  res.sendFile('home.html', { root: path.join(__dirname, '../', 'server') });
 });
 
 module.exports = router;
