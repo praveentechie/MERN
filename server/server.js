@@ -71,14 +71,14 @@ app.use('/v*/users', userRoute);
 
 /* Replace depricated mongo promise and use from Node */
 mongoose.Promise = global.Promise;
-mongoose.connect(`mongodb://${dbInstance}:${dbPort}/mern`).then((db)=> {
+mongoose.connect(`mongodb://${dbInstance || localhost}:${dbPort || 27017}/mern`).then((db)=> {
   console.log('Connected to db');
 }).catch(err => {
   console.log('Failed to connect to db', err);
 });
 
 /* Start server */
-app.listen(serverPort, function(err) {
+app.listen(serverPort || 3000, function(err) {
   if (err) {
     console.error('Failed with ', err);
     return;
