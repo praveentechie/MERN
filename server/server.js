@@ -78,10 +78,10 @@ app.use('/v*/users', userRoute);
 // });
 
 /* Start server */
-app.listen(serverPort || 3000, function(err) {
+app.listen(3000, function(err) {
   if (err) {
     console.error('Failed with ', err);
     return;
   }
-  console.log('Server running in', serverPort);
+  console.log('Server running in', 3000);
 });
