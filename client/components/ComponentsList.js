@@ -9,6 +9,9 @@ export default class ComponentsList extends Component {
     return (
       <div className='components-list'>
         <div className='component-section'>
+          <Link to='/components/loader' className='section-item'>
+            Loader
+          </Link>
           <Link to='/components/table' className='section-item'>
             Table
           </Link>

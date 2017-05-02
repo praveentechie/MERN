@@ -1,4 +1,5 @@
 import React, { Component }   from 'react';
+import InputSlide             from './InputSlide';
 import '../scss/components/_InputField.scss';
 
 export default class InputField extends Component {
@@ -12,17 +13,17 @@ export default class InputField extends Component {
   }
 
   updateVSplit(event) {
-    this.setState({vSplit: event.target.value})
+    this.setState({vSplit: event.target.value});
   }
 
   render() {
     const {vSplit} = this.state;
 
     return (
-      <div className='input-field-component'>
-        <div className=''>
-          <h3>Field 1</h3>
-          <span className={`ap-input input-v-split ${vSplit ? 'input-filled' : null}`}>
+      <div className='component-container'>
+        <div className='component-wrapper'>
+          <h3 className='component-title'>Field 1</h3>
+          <span className={`v-input input-v-split ${vSplit ? 'input-filled' : ''}`}>
             <input className='input-field input-field-v-split'
               type='text'
               id='input-1'
@@ -33,6 +34,10 @@ export default class InputField extends Component {
               <span className='input-label-content input-label-content-v-split'>First Name</span>
             </label>
           </span>
+        </div>
+        <div className='component-wrapper'>
+          <h3 className='component-title'>Field Style 2</h3>
+          <InputSlide />
         </div>
       </div>
     );

@@ -48,3 +48,20 @@ body {
     font-size: 3em;
   }
 }
+
+.component-container {
+	display: flex;
+	flex-wrap: wrap;
+  counter-reset: buttons;
+	.component-wrapper {
+		color: #f3f3f3;
+		width: 33.33%;
+		min-width: 250px;
+    .component-title {      
+      &::before {
+        counter-increment: buttons;
+        content: counter(buttons) ". ";
+      }
+    }
+	}
+}

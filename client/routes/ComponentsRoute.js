@@ -11,6 +11,11 @@ export default (reducerRegistry) => {
         cb(null, component);
       });
     },
+    renderLoader: (location, cb) => {
+      require(['../components/PageLoaders'], (component)=> {
+        cb(null, component);
+      });
+    },
     renderTable: (location, cb) => {
       require(['../components/Table'], (component)=> {
         cb(null, component);
@@ -31,6 +36,7 @@ export default (reducerRegistry) => {
   return(
     <Route path='components' getComponent={appRoute.renderComponents}>
       <Route path='table' getComponent={appRoute.renderTable} />
+      <Route path='loader' getComponent={appRoute.renderLoader} />
       <Route path='button' getComponent={appRoute.renderButton} />
       <Route path='input-field' getComponent={appRoute.renderInputField} />
     </Route>

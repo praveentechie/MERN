@@ -7,11 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-server": "babel server -d dist --presets es2015,stage-2",
     "debug": "nodemon server/server.js --exec babel-node --presets es2015,stage-2",
-    "start": "node_modules/webpack-dev-server/bin/webpack-dev-server.js --progress --inline --hot --config ./webpack/dev.config.js",
-    "prod-server": "node dist/server.js",
+    "start": "node dist/server.js",
     "prod-client": "node_modules/webpack/bin/webpack.js --config ./webpack/prod.config.js",
-    "dev-mode": "npm run start & npm run debug",
-    "prod-mode": "npm run prod-client & npm run prod-server"
+    "prod-mode": "npm run prod-client && npm run prod-server"
   },
   "repository": {
     "type": "git",

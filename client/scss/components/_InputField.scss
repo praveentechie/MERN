@@ -1,4 +1,14 @@
-.ap-input {
+.input-field-component {
+	display: flex;
+	flex-wrap: wrap;
+	.input-element-wrapper {
+		color: #f3f3f3;
+		width: 33.33%;
+		min-width: 250px;
+	}
+}
+
+.v-input {
 	position: relative;
 	z-index: 1;
 	display: inline-block;
@@ -127,6 +137,3 @@
 	transform: translate3d(0, 0.5em, 0);
 }
 /*v-split*/
-
-/*h-split*/
-/*h-split*/

@@ -25,7 +25,7 @@ class ComponentScreen extends Component {
 
     return(
       <div className={`${styles.componentLists} components-list-page`}>
-        <div className='component-container'>
+        <div className='component-nav-container'>
         <ComponentsList />
         {
           children ?
